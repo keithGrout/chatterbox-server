@@ -1,5 +1,5 @@
 app = {
-    server: 'https://api.parse.com/1/classes/chatterbox/',
+    server: 'http://127.0.0.1:3000/1/classes/chatterbox/',
     username: 'anonymous',
     lastMessageId: 0,
 
@@ -17,7 +17,7 @@ app = {
 
     loadAllMessages: function(){
       app.loadMsgs();
-      setTimeout(app.loadAllMessages, 500);
+      setTimeout(app.loadAllMessages, 5000);
     },
 
     handleSubmit: function(e){
@@ -58,11 +58,11 @@ app = {
     loadMsgs: function(){
       $.ajax({
         url: app.server,
-        data: { order: '-createdAt'},
+        //data: { order: '-createdAt'},
         contentType: 'application/json',
         success: function(json){
           //console.log(json.results);
-          app.processNewMessages(json.results);
+          app.processNewMessages(json);
         },
         complete: function(){
           app.stopSpinner();
@@ -71,13 +71,14 @@ app = {
     },
 
     sendMsg: function(message){
+      message.username = "BArt";
       $.ajax({
         type: 'POST',
         url: app.server,
         data: JSON.stringify(message),
+        json: true,
         contentType: 'application/json',
         success: function(json){
-          //console.log(json);
           app.processNewMessage(message, json.objectId);
         },
         complete: function(){
