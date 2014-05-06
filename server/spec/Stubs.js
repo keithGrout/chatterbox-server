@@ -1,7 +1,5 @@
 // Methods for stubbing HTTP requests and responses
-module.exports = {
-
-  response: function() {
+exports.response = function() {
     this._ended = false;
     this._responseCode = null;
     this._headers = null;
@@ -17,9 +15,9 @@ module.exports = {
       self._ended = true;
       self._data = data;
     };
-  },
+  };
 
-  request: function(url, method, postdata) {
+exports.request = function(url, method, postdata) {
     this.url = url;
     this.method = method;
     this._postData = postdata;
@@ -35,6 +33,5 @@ module.exports = {
         callback();
       }
     };
-  }
+  };
 
-};
