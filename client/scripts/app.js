@@ -1,5 +1,5 @@
 app = {
-    server: 'http://127.0.0.1:3000/1/classes/chatterbox/',
+    server: 'http://keithchat.azurewebsites.net/1/classes/chatterbox/',
     username: 'anonymous',
     lastMessageId: 0,
 
