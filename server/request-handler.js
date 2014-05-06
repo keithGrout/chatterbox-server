@@ -5,6 +5,7 @@
  * this file and include it in basic-server.js so that it actually works.
  * *Hint* Check out the node module documentation at http://nodejs.org/api/modules.html. */
 var messages = [];
+var fs = require('fs');
 
 var key = 1;
 
@@ -47,7 +48,18 @@ exports.handleRequest = function (request, response) {
 
     }
   } else {
-    response.end("Nothing here!");
+    fs.readFile('../client/index.html', function (err, html) {
+      if (err) {
+        throw err;
+      }
+      console.log(html);
+      response.writeHeader(200, {'Content-Type': 'text/html'});  // <-- HERE!
+      response.write(html);
+      response.end();
+
+    });
+
+    //sresponse.end("Nothing here!");
   }
 };
 
